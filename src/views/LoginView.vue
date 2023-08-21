@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import InputButton from '../components/InputButton.vue'
 import InputFeild from '../components/InputFeild.vue'
 import router from '@/router'
-import { store } from '../stores/user';
+import { store } from '../stores/user'
 
 const email = ref('')
 const password = ref('')
@@ -32,16 +32,15 @@ const validatePassword = (password) => {
 }
 
 function loginHandle() {
-  if(validateEmail(email.value) && validatePassword(password.value)){
-    if (email.value=='demo@bmc.com' && password.value=='123456') {
-        
-        localStorage.setItem('userData',email.value)
-        router.push('/')
-        store.isAuthenticated = true;
-        return;
+  if (validateEmail(email.value) && validatePassword(password.value)) {
+    if (email.value == 'demo@bmc.com' && password.value == '123456') {
+      localStorage.setItem('userData', email.value)
+      router.push('/')
+      store.isAuthenticated = true
+      return
     }
   }
-  store.isAuthenticated = false;
+  store.isAuthenticated = false
 }
 </script>
 
