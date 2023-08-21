@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import StatsView from '../views/StatsView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import LoginViewVue from '../views/LoginView.vue'
+import { store } from '../stores/user.js'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,33 +28,26 @@ const router = createRouter({
           component: () => import('../views/UsersView.vue')
         }
       ],
-      meta:{
+      meta: {
         requiresAuth: true
       }
     }
   ]
 })
 
-/* router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (localStorage.getItem('userName') == null) {
+    if (localStorage.getItem('userData') == null && !store.isAuthenticated) {
       next({
         path: '/login',
-        params: { nextUrl: to.fullPath }
+        name: 'Login'
       })
     } else {
-      if (!store.state.isAuthenticated) {
-        next({
-          path: '/login',
-          params: { nextUrl: to.fullPath }
-        })
-      } else {
         next()
-      }
     }
   } else {
     next()
   }
-}) */
+})
 
 export default router
