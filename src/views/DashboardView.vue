@@ -6,8 +6,8 @@ import { RouterView } from 'vue-router'
 <template>
   <div class="w-screen h-screen grid grid-cols-4 p-10">
     <div class="">
-      <DashboardMenuBlock title="Stats" routeto="/dashboard/" />
-      <DashboardMenuBlock title="Users" routeto="/dashboard/users" />
+      <DashboardMenuBlock title="Stats" routeto="/" />
+      <DashboardMenuBlock title="Users" routeto="/users" />
     </div>
     <div class="col-span-3">
       <RouterView />

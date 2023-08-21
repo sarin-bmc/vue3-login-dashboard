@@ -7,12 +7,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'Login',
       component: LoginViewVue
     },
     {
-      path: '/dashboard',
+      path: '/',
       name: 'Dashboard',
       component: DashboardView,
       children: [
@@ -26,9 +26,34 @@ const router = createRouter({
           name: 'Users',
           component: () => import('../views/UsersView.vue')
         }
-      ]
+      ],
+      meta:{
+        requiresAuth: true
+      }
     }
   ]
 })
+
+/* router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem('userName') == null) {
+      next({
+        path: '/login',
+        params: { nextUrl: to.fullPath }
+      })
+    } else {
+      if (!store.state.isAuthenticated) {
+        next({
+          path: '/login',
+          params: { nextUrl: to.fullPath }
+        })
+      } else {
+        next()
+      }
+    }
+  } else {
+    next()
+  }
+}) */
 
 export default router

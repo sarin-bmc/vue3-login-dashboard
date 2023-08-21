@@ -1,7 +1,5 @@
 <script setup>
-import InputButton from '../components/InputButton.vue';
-
-
+import InputButton from '../components/InputButton.vue'
 </script>
 
 <template>
@@ -10,6 +8,6 @@ import InputButton from '../components/InputButton.vue';
       <span class="username">User Name</span>
       <button type="button" class="cursor-pointer hover:scale-105">Edit</button>
     </div>
-    <InputButton title="LogOut" routeto="/"/>
+    <InputButton title="LogOut" routeto="/login" />
   </div>
 </template>
