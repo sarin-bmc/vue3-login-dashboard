@@ -1,11 +1,12 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import CommentBlocks from './common/CommentBlocks.vue'
 const props = defineProps({
   post: Object
 })
 
 let showComments = ref(false)
+let showOptions = ref(false)
 const comments = ref([])
 const getData = async () => {
   try {
@@ -21,11 +22,32 @@ const getData = async () => {
 
 <template>
   <div class="w-f p-5 grid grid-cols-1 bg-blue-100 rounded-2xl mb-2">
-    <div class="w-full flex justify-between text-black p-5">
+    <div class="w-full flex justify-between text-black p-5 relative">
       <div class="content grid grid-col-1">
         <div class="name p-1">{{ props.post.title }}</div>
       </div>
-      <button type="button" class="cursor-pointer hover:scale-105">Edit</button>
+
+      <div class="toggle_button absolute right-0">
+        <button @click="showOptions = !showOptions" class="absolute right-0 top-1 pr-1">
+        <svg v-show="!showOptions" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+          <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"
+          />
+        </svg>
+        <svg v-show="showOptions" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="rotate-90">
+          <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"
+          />
+        </svg>
+        
+        </button>
+        <div v-if="showOptions" class="bg-blue-50 p-3 rounded-lg grid grid-cols-1 gap-1">
+          <div>Edit</div>
+          <div>Delete</div>
+        </div>
+      </div>
     </div>
     <div class="comments w-full grid-col-1 pl-5">
       <div class="toggle-button w-fit" @click="showComments = !showComments">
@@ -63,12 +85,11 @@ const getData = async () => {
           hide comments
         </div>
       </div>
-      <div v-show="showComments" class="comment-contents grid-cols-1 ">
+      <div v-show="showComments" class="comment-contents grid-cols-1">
         <CommentBlocks
           v-for="comment in comments.slice(0, 5)"
           :key="comment.id"
           :comment="comment"
-
           class="border-b border-separate border-blue-200"
         />
       </div>

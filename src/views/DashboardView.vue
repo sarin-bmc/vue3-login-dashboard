@@ -10,7 +10,6 @@ const handleLogout = () => {
   localStorage.removeItem('userData')
   router.push('/login')
 }
-
 </script>
 
 <template>
@@ -21,7 +20,7 @@ const handleLogout = () => {
         <DashboardMenuBlock title="Users" routeto="/users" />
         <DashboardMenuBlock title="Posts" routeto="/posts" />
       </div>
-      <InputButton title="LogOut" @click="handleLogout" class="bottom-10 mt-20"/>
+      <InputButton title="LogOut" @click="handleLogout" class="bottom-10 mt-20" />
     </div>
     <div class="col-span-3">
       <RouterView />
