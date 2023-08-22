@@ -1,15 +1,20 @@
 <script setup>
 import { ref } from 'vue'
-import CommentBlocks from './common/CommentBlocks.vue'
+import CommentBlocks from './common/commentblocks.vue'
 import LoadingIndicator from './common/LoadingIndicator.vue'
+
 const props = defineProps({
-  post: Object
+  post: Object,
+  //deletePost: Function
 })
+
+const emit = defineEmits(['deletePost']);
 
 let showComments = ref(false)
 let showOptions = ref(false)
 const comments = ref([])
 let isLoading = ref(true)
+
 const getData = async () => {
   try {
     let response = await fetch('https://jsonplaceholder.typicode.com/comments')
@@ -58,9 +63,11 @@ const getData = async () => {
             />
           </svg>
         </button>
-        <div v-if="showOptions" class="bg-blue-50 p-3 rounded-lg grid grid-cols-1 gap-1">
-          <div>Edit</div>
-          <div>Delete</div>
+        <div v-if="showOptions" class="bg-blue-50 p-5 rounded-lg grid grid-cols-1 gap-1">
+          <div class="cursor-pointer hover:scale-105">Edit</div>
+          <div class="cursor-pointer hover:scale-105" @click="emit('deletePost',post)">
+            Delete
+          </div>
         </div>
       </div>
     </div>

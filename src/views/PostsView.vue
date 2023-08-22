@@ -21,11 +21,27 @@ const getData = async () => {
   }
 }
 onMounted(() => getData())
+
+const deletePost = async (post_id) => {
+  if (confirm('Do you really want to delete?')) {
+    try {
+      await fetch(`https://jsonplaceholder.typicode.com/posts/${post_id}`, {
+        method: 'DELETE'
+      })
+      console.log(post_id)
+      delete posts.value[post_id]
+    } catch (error) {
+      console.log(error)
+    } finally {
+      console.log('done delete post')
+    }
+  }
+}
 </script>
 
 <template>
   <LoadingIndicator v-show="isLoading" class="w-full h-full" />
   <div class="users w-full h-screen p-20 overflow-y-scroll">
-    <PostBlocks v-for="post in posts" :key="post.id" :post="post" />
+    <PostBlocks v-for="post in posts" :key="post.id" :post="post" @deletePost="deletePost" />
   </div>
 </template>
