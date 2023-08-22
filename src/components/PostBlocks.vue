@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import CommentBlocks from './common/CommentBlocks.vue'
+import LoadingIndicator from './common/LoadingIndicator.vue'
 const props = defineProps({
   post: Object
 })
@@ -8,6 +9,7 @@ const props = defineProps({
 let showComments = ref(false)
 let showOptions = ref(false)
 const comments = ref([])
+let isLoading = ref(true)
 const getData = async () => {
   try {
     let response = await fetch('https://jsonplaceholder.typicode.com/comments')
@@ -15,6 +17,9 @@ const getData = async () => {
   } catch (error) {
     console.log(error)
   } finally {
+    if (comments.value.length > 0) {
+      isLoading.value = false
+    }
     console.log(comments.value)
   }
 }
@@ -29,19 +34,29 @@ const getData = async () => {
 
       <div class="toggle_button absolute right-0">
         <button @click="showOptions = !showOptions" class="absolute right-0 top-1 pr-1">
-        <svg v-show="!showOptions" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-          <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-          <path
-            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"
-          />
-        </svg>
-        <svg v-show="showOptions" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="rotate-90">
-          <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-          <path
-            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"
-          />
-        </svg>
-        
+          <svg
+            v-show="!showOptions"
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 448 512"
+          >
+            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"
+            />
+          </svg>
+          <svg
+            v-show="showOptions"
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 448 512"
+            class="rotate-90"
+          >
+            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"
+            />
+          </svg>
         </button>
         <div v-if="showOptions" class="bg-blue-50 p-3 rounded-lg grid grid-cols-1 gap-1">
           <div>Edit</div>
@@ -86,6 +101,7 @@ const getData = async () => {
         </div>
       </div>
       <div v-show="showComments" class="comment-contents grid-cols-1">
+        <LoadingIndicator v-show="isLoading" class="w-full h-full" />
         <CommentBlocks
           v-for="comment in comments.slice(0, 5)"
           :key="comment.id"
