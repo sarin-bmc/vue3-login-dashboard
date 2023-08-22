@@ -22,14 +22,16 @@ const getData = async () => {
 }
 onMounted(() => getData())
 
-const deletePost = async (post_id) => {
+const deletePost = async (post) => {
   if (confirm('Do you really want to delete?')) {
     try {
-      await fetch(`https://jsonplaceholder.typicode.com/posts/${post_id}`, {
+      await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
         method: 'DELETE'
       })
-      console.log(post_id)
-      delete posts.value[post_id]
+      console.log(post.id)
+      delete posts.value[post.id]
+      let updatePosts = posts.value.filter((posts) => posts.id !== post.id);
+      posts.value = updatePosts;
     } catch (error) {
       console.log(error)
     }

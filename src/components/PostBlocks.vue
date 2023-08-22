@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import LoadingIndicator from './common/LoadingIndicator.vue'
-import CommentBlocks from './common/commentblocks.vue'
+import CommentBlocks from './common/CommentBlocks.vue'
 
 const props = defineProps({
   post: Object,
