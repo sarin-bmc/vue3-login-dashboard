@@ -8,8 +8,8 @@ import { store } from '../stores/user'
 const email = ref('')
 const password = ref('')
 
-const showEmailError = ref(false)
-const showPasswordError = ref(false)
+let showEmailError = ref(false)
+let showPasswordError = ref(false)
 
 const validateEmail = (email) => {
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/

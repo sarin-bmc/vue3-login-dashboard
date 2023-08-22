@@ -10,18 +10,18 @@ const handleLogout = () => {
   localStorage.removeItem('userData')
   router.push('/login')
 }
+
 </script>
 
 <template>
   <div class="w-screen h-screen grid grid-cols-4">
     <div class="p-10">
-        <div>
-
-            <DashboardMenuBlock title="Stats" routeto="/" />
-            <DashboardMenuBlock title="Users" routeto="/users" />
-        </div>
-        <InputButton title="LogOut" @click="handleLogout" class="bottom-10 mt-20"/>
-
+      <div>
+        <DashboardMenuBlock title="Stats" routeto="/" />
+        <DashboardMenuBlock title="Users" routeto="/users" />
+        <DashboardMenuBlock title="Posts" routeto="/posts" />
+      </div>
+      <InputButton title="LogOut" @click="handleLogout" class="bottom-10 mt-20"/>
     </div>
     <div class="col-span-3">
       <RouterView />

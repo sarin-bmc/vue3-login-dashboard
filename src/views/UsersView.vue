@@ -9,15 +9,15 @@ const getData = async () => {
     users.value = await response.json()
   } catch (error) {
     console.log(error)
-  }finally{
-    console.log(users.value);
+  } finally {
+    console.log(users.value)
   }
 }
-onMounted(() => getData());
+onMounted(() => getData())
 </script>
 
 <template>
-  <div class="users w-full h-screen p-20 overflow-y-scroll" >
-    <UserBlocks v-for="user in users" :key="user.id" :user="user"/>
+  <div class="users w-full h-screen p-20 overflow-y-scroll">
+    <UserBlocks v-for="user in users" :key="user.id" :user="user" />
   </div>
 </template>

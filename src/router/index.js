@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import StatsView from '../views/StatsView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import LoginViewVue from '../views/LoginView.vue'
+import UsersViewVue from '../views/UsersView.vue'
+import PostsViewVue from '../views/PostsView.vue'
 import { store } from '../stores/user.js'
 
 const router = createRouter({
@@ -25,7 +27,12 @@ const router = createRouter({
         {
           path: 'users',
           name: 'Users',
-          component: () => import('../views/UsersView.vue')
+          component: UsersViewVue
+        },
+        {
+          path: 'posts',
+          name: 'Posts',
+          component: PostsViewVue
         }
       ],
       meta: {
