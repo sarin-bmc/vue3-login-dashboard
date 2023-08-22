@@ -32,8 +32,6 @@ const deletePost = async (post_id) => {
       delete posts.value[post_id]
     } catch (error) {
       console.log(error)
-    } finally {
-      console.log('done delete post')
     }
   }
 }
