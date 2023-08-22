@@ -1,7 +1,7 @@
 <script setup>
 import DashboardMenuBlock from '../components/DashboardMenuBlock.vue'
 import { RouterView } from 'vue-router'
-import InputButton from '../components/InputButton.vue'
+import InputButton from '../components/common/InputButton.vue'
 import { store } from '../stores/user.js'
 import router from '@/router'
 

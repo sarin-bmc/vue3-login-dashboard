@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import InputButton from '../components/InputButton.vue'
-import InputFeild from '../components/InputFeild.vue'
+import InputButton from '../components/common/InputButton.vue'
+import InputFeild from '../components/common/InputFeild.vue'
 import router from '@/router'
 import { store } from '../stores/user'
 
